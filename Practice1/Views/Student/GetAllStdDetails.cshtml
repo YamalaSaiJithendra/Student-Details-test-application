@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Practice1.Models.StudentModel>
+
+<p>
+    @*@Html.ActionLink("Add New Student", "AddStudentDetails")*@
+    <a href='@Url.Action("AddStudentDetails")' class="btn btn-primary">Add New Student</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @(item.Gender ? "Male" : "Female")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                    @*<button type="submit" value="Edit" new { id=item.StudentId, new {onclick="return confirm('Are sure wants to delete?');" } }>Edit</button>*@
+                    <a href='@Url.Action("EditSTDDetails")' new { id=item.StudentId } class="btn btn-primary">Update</a>
+                    @Html.ActionLink("Edit", "EditSTDDetails", new {  id=item.StudentId }) |
+                    @Html.ActionLink("Delete", "DeleteStd", new { id = item.StudentId },new {onclick="return confirm('Are sure wants to delete?');" })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
