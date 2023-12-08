@@ -17,4 +17,11 @@ namespace Practice1.Models
         [Required(ErrorMessage = "City Name required.")]
         public string City { get; set; }
     }
+    public class TeacherModel
+    {
+        public string Teacher_Name { get; set; }
+        public int EmpId { get; set; }
+        public string TeachingSubject { get; set; }
+        public int Experience { get; set; }
+    }
 }
