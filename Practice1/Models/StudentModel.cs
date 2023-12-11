@@ -25,5 +25,6 @@ namespace Practice1.Models
         public int Experience { get; set; }
         public int Phone_Number { get; set; }
         public string? Address { get; set; }
+        public long Age { get; set; }
     }
 }
