@@ -24,7 +24,5 @@ namespace Practice1.Models
         public string TeachingSubject { get; set; }
         public int Experience { get; set; }
         public int Phone_Number { get; set; }
-        public string? Address { get; set; }
-        public long Age { get; set; }
     }
 }
