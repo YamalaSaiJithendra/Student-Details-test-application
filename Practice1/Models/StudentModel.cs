@@ -23,5 +23,6 @@ namespace Practice1.Models
         public int EmpId { get; set; }
         public string TeachingSubject { get; set; }
         public int Experience { get; set; }
+        public int Phone_Number { get; set; }
     }
 }
