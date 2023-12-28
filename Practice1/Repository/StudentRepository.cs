@@ -23,7 +23,6 @@ namespace Practice1.Repository
             con = configuration.GetConnectionString("getconn");
             constr  = new SqlConnection(con);
             return constr;
-            //SqlConnection  constr  = new SqlConnection(configuration.GetConnectionString("getconn"));
         }
         public bool AddStudentDetails(StudentModel obj )
         {
@@ -58,7 +57,6 @@ namespace Practice1.Repository
             SqlConnection con = connection();
             List<StudentModel> StdList = new List<StudentModel>();
             
-
             SqlCommand com = new SqlCommand("GetStudents", con);
             com.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(com);

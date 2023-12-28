@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<Practice1.Models.StudentModel>
 
 <p>
-    @*@Html.ActionLink("Add New Student", "AddStudentDetails")*@
     <a href='@Url.Action("AddStudentDetails")' class="btn btn-primary">Add New Student</a>
 </p>
 <table class="table">
@@ -45,9 +44,9 @@
             </td>
             <td>
                     @*<button type="submit" value="Edit" new { id=item.StudentId, new {onclick="return confirm('Are sure wants to delete?');" } }>Edit</button>*@
-                    <a href='@Url.Action("EditSTDDetails")' new { id=item.StudentId } class="btn btn-primary">Update</a>
-                    @Html.ActionLink("Edit", "EditSTDDetails", new {  id=item.StudentId }) |
-                    @Html.ActionLink("Delete", "DeleteStd", new { id = item.StudentId },new {onclick="return confirm('Are sure wants to delete?');" })
+                    @*<a href='@Url.Action("EditSTDDetails")' new { id=item.StudentId } class="btn btn-primary">Update</a>*@
+                    @Html.ActionLink("Edit", "EditSTDDetails", new {  Id=item.StudentId }) |
+                    @Html.ActionLink("Delete", "DeleteStd", new { Id = item.StudentId },new {onclick="return confirm('Are sure wants to delete?');" })
             </td>
         </tr>
         }

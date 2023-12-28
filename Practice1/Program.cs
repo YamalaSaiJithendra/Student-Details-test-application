@@ -24,5 +24,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Student}/{action=AddStudentDetails}");
+    //pattern: "{controller=Student}/{action=AddTeacherDetails}");
 
 app.Run();
