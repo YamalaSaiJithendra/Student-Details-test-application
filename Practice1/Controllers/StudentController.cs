@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Practice1.Models;
-using Practice1.Repository;
+using Practice1.Repository.Implementation;
+using Practice1.Repository.Interfaces;
 using System.Linq.Expressions;
 
 namespace Practice1.Controllers
@@ -10,19 +11,16 @@ namespace Practice1.Controllers
     {
 
         public readonly IConfiguration _configuration;
+        private readonly IStudentRepository _studentRepository;
 
-        public StudentController(IConfiguration configuration)
+        public StudentController(IConfiguration configuration, IStudentRepository studentRepository)
         {
             _configuration = configuration;
+            _studentRepository = studentRepository;
         }
 
-        //private IActionResult GetConnectionString()
-        //{
-        //    var conStr = _configuration.GetConnectionString("getconn");
-        //    SqlConnection con = new SqlConnection(conStr);
-        //    return View(con); 
-        //}
-       
+
+        //[HttpGet("GetAllStdDetails")]
         public IActionResult GetAllStdDetails()
         {
             //For ConnectionString value
@@ -37,6 +35,11 @@ namespace Practice1.Controllers
         public IActionResult AddStudentDetails()
         {
             return View();
+        }
+        // This is for Redirecting to teacher controller
+        public IActionResult RedirectionMethod()
+        {
+            return RedirectToAction("GetAllTcrDetails", "Teacher");
         }
 
         //POST: Student:AddStudent
@@ -70,7 +73,6 @@ namespace Practice1.Controllers
 
         // POST: Student/EditSTDDetails/5
         [HttpPost]
-
         public IActionResult EditSTDDetails(int id, StudentModel obj)
         {
             try
@@ -87,7 +89,8 @@ namespace Practice1.Controllers
             }
         }
 
-        // GET: Student/DeleteStd/5
+        // Delete: Student/DeleteStd
+        //[HttpDelete("DeleteStd")]
         public IActionResult DeleteStd(int id)
         {
             try

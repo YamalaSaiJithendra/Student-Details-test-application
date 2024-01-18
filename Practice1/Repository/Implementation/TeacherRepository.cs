@@ -1,11 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Practice1.Models;
+using Practice1.Repository.Interfaces;
 using System.Data;
 
-namespace Practice1.Repository
+namespace Practice1.Repository.Implementation
 {
-    public class TeacherRepository
+    public class TeacherRepository : ITeacherRepository
     {
         private string con;
         private SqlConnection constr = new SqlConnection();
@@ -19,7 +20,7 @@ namespace Practice1.Repository
             .Build();
 
             con = configuration.GetConnectionString("getconn");
-            constr  = new SqlConnection(con);
+            constr = new SqlConnection(con);
             return constr;
             //SqlConnection  constr  = new SqlConnection(configuration.GetConnectionString("getconn"));
         }
@@ -55,7 +56,7 @@ namespace Practice1.Repository
         {
             //SQL COnnection 
             SqlConnection con = connection();
-            
+
             List<TeacherModel> TcrList = new List<TeacherModel>();
 
             SqlCommand com = new SqlCommand("GetTeachers", con);
@@ -78,7 +79,7 @@ namespace Practice1.Repository
                         Teacher_Name = Convert.ToString(dr["Teacher_Name"]),
                         TeachingSubject = Convert.ToString(dr["TeachingSubject"]),
                         EmpId = Convert.ToInt32(dr["EmpId"]),
-                        Phone_Number= Convert.ToString(dr["Phone_Number"]),
+                        Phone_Number = Convert.ToString(dr["Phone_Number"]),
                         Experience = Convert.ToInt32(dr["Experience"])
                     }
                     );
@@ -138,5 +139,5 @@ namespace Practice1.Repository
                 return false;
             }
         }
-     }
+    }
 }
