@@ -1,24 +1,38 @@
 ﻿using MessagePack;
 using Microsoft.AspNetCore.Mvc;
 using Practice1.Models;
-using Practice1.Repository;
+using Practice1.Repository.Implementation;
+using Practice1.Repository.Interfaces;
 
 namespace Practice1.Controllers
 {
     public class TeacherController : Controller
     {
+        private readonly ITeacherRepository _teacherRepository;
+        public TeacherController(ITeacherRepository teacherRepository)
+        {
+            _teacherRepository = teacherRepository;
+        }
+
         //Get all teachers
+        //[HttpGet("GetAllTcrDetails")]
         [HttpGet]
         public IActionResult GetAllTcrDetails()
         {
-            TeacherRepository TcrRepo = new TeacherRepository();
+          //  TeacherRepository TcrRepo = new TeacherRepository();
             ModelState.Clear();
-            return View(TcrRepo.GetAllTeachers());
+            return View(_teacherRepository.GetAllTeachers());
         }
         //GET : Get Teacher details
         public IActionResult AddTeacherDetails()
         {
             return View();
+        }
+
+        // This is for Redirecting to teacher controller
+        public IActionResult RedirectionMethod()
+        {
+            return this.RedirectToAction("GetAllStdDetails", "Student");
         }
         //POST: Teacher:AddTeacherDetails
         [HttpPost]
@@ -46,6 +60,7 @@ namespace Practice1.Controllers
             TeacherRepository TcrRepo = new TeacherRepository();
             return View(TcrRepo.GetAllTeachers().Find(tcr => tcr.Id==id));
         }
+        //[HttpPost("EditTeacherDetails")]
         [HttpPost]
         public IActionResult EditTeacherDetails(int id, TeacherModel tcr)
         {
@@ -62,6 +77,7 @@ namespace Practice1.Controllers
 
         }
         //Delete Teacher reocords based on Id
+        //[HttpDelete("DeleteTeacherDetails")]
         public IActionResult DeleteTeacherDetails(int id)
         {
             try

@@ -1,8 +1,13 @@
+using Practice1.Repository.Implementation;
+using Practice1.Repository.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //var ConnectionString = builder.Configuration.GetConnectionString("getconn");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IStudentRepository, StudentRepository>();
+builder.Services.AddTransient<ITeacherRepository, TeacherRepository>();
 
 var app = builder.Build();
 

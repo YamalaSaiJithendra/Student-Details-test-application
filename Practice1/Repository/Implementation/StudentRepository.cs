@@ -3,11 +3,12 @@ using Practice1.Models;
 using System.Configuration;
 using System.Data;
 using Microsoft.Extensions.Configuration;
+using Practice1.Repository.Interfaces;
 //using ConfigurationManager = System.Configuration.ConfigurationManager;
 
-namespace Practice1.Repository
+namespace Practice1.Repository.Implementation
 {
-    public class StudentRepository
+    public class StudentRepository : IStudentRepository
     {
         private string con;
         private SqlConnection constr = new SqlConnection();
@@ -21,13 +22,13 @@ namespace Practice1.Repository
             .Build();
 
             con = configuration.GetConnectionString("getconn");
-            constr  = new SqlConnection(con);
+            constr = new SqlConnection(con);
             return constr;
         }
-        public bool AddStudentDetails(StudentModel obj )
+        public bool AddStudentDetails(StudentModel obj)
         {
             //connection();
-            SqlConnection con = connection();   
+            SqlConnection con = connection();
             SqlCommand com = new SqlCommand("AddStudent", con);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@Name", obj.Name);
@@ -56,7 +57,7 @@ namespace Practice1.Repository
             //connection();
             SqlConnection con = connection();
             List<StudentModel> StdList = new List<StudentModel>();
-            
+
             SqlCommand com = new SqlCommand("GetStudents", con);
             com.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(com);
@@ -74,9 +75,9 @@ namespace Practice1.Repository
                     {
 
                         StudentId = Convert.ToInt32(dr["Id"]),
-                        Name =Convert.ToString(dr["Name"]),
-                        Age= Convert.ToInt32(dr["Age"]),
-                        Gender=Convert.ToBoolean(dr["Gender"]),
+                        Name = Convert.ToString(dr["Name"]),
+                        Age = Convert.ToInt32(dr["Age"]),
+                        Gender = Convert.ToBoolean(dr["Gender"]),
                         City = Convert.ToString(dr["City"])
 
                     }
@@ -137,7 +138,7 @@ namespace Practice1.Repository
             {
 
                 return false;
-            }   
+            }
         }
     }
 }
